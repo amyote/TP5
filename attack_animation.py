@@ -16,11 +16,14 @@ class AttackAnimation(arcade.Sprite):
     ANIMATION_UPDATE_TIME = 1 / ANIMATION_SPEED
 
     def __init__(self, attackType):
+
+        # Initialiser le sprite.
         super().__init__()
 
         self.timeSinceLastSwap = 0
         self.attackType = attackType
 
+        # On charge les textures appropriees dependant de attackType.
         if self.attackType == AttackType.ROCK:
             self.textures = [
                 arcade.load_texture("assets/srock.png"),
@@ -37,13 +40,14 @@ class AttackAnimation(arcade.Sprite):
                 arcade.load_texture("assets/scissors-close.png"),
             ]
         
+        # On specifie quelque trucs.
         self.scale = self.ATTACK_SCALE
         self.currentTexture = 0
         self.set_texture(self.currentTexture)
 
     def on_update(self, deltaTime: float = 1 / 60):
 
-        # Change texture, but wait some time before swapping.
+        # Changer la texture, mais attendre un peu avant de ce faire.
         self.timeSinceLastSwap += deltaTime
 
         if self.timeSinceLastSwap > self.ANIMATION_UPDATE_TIME:
